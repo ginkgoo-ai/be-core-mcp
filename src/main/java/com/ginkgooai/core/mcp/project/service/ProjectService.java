@@ -21,26 +21,19 @@ public class ProjectService {
 
     private final ProjectClient projectClient;
 
-    private void setAuthorization(String authorization){
-        ContextUtils.get().put(HttpHeaders.AUTHORIZATION, authorization);
-    }
-
     @Tool(description = "Get all project basic info")
-    public List<String> getAllProjectNames(String params){
-        setAuthorization(params);
-        return Objects.requireNonNull(projectClient.getAllProjectsBasicInfo().getBody()).stream().map(ProjectBasicResponse::getId).toList();
+    public List<String> getAllProjectNames(String params) {
+        return Objects.requireNonNull(projectClient.getAllProjectsBasicInfo().getBody())
+            .stream().map(ProjectBasicResponse::getId).toList();
     }
 
     @Tool(description = "Get project detail by project id")
-    public ProjectResponse getProjectById(String params, String projectId){
-        setAuthorization(params);
+    public ProjectResponse getProjectById(String params, String projectId) {
         return projectClient.getProjectById(projectId).getBody();
     }
 
     @Tool(description = "Get project roles by project id")
-    public Page<ProjectRoleResponse> getProjectRolesByProjectId(String params, String projectId, String sort){
-        setAuthorization(params);
+    public Page<ProjectRoleResponse> getProjectRolesByProjectId(String params, String projectId, String sort) {
         return projectClient.getProjectRoles(projectId, 0, 100, sort, null).getBody();
     }
-
 }
