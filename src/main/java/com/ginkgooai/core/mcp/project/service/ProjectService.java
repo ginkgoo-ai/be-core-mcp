@@ -22,18 +22,18 @@ public class ProjectService {
     private final ProjectClient projectClient;
 
     @Tool(description = "Get all project basic info")
-    public List<String> getAllProjectNames(String params) {
+    public List<String> getAllProjectNames(String params, String workspaceId) {
         return Objects.requireNonNull(projectClient.getAllProjectsBasicInfo().getBody())
             .stream().map(ProjectBasicResponse::getId).toList();
     }
 
     @Tool(description = "Get project detail by project id")
-    public ProjectResponse getProjectById(String params, String projectId) {
+    public ProjectResponse getProjectById(String params, String workspaceId, String projectId) {
         return projectClient.getProjectById(projectId).getBody();
     }
 
     @Tool(description = "Get project roles by project id")
-    public Page<ProjectRoleResponse> getProjectRolesByProjectId(String params, String projectId, String sort) {
+    public Page<ProjectRoleResponse> getProjectRolesByProjectId(String params, String workspaceId, String projectId, String sort) {
         return projectClient.getProjectRoles(projectId, 0, 100, sort, null).getBody();
     }
 }

@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthorizationAspect {
 
-    @Before("@annotation(org.springframework.ai.tool.annotation.Tool) && args(params,..)")
-    public void setAuthorizationBefore(String params) {
+    @Before("@annotation(org.springframework.ai.tool.annotation.Tool) && args(params,workspaceId,..)")
+    public void setAuthorizationBefore(String params, String workspaceId) {
         ContextUtils.get().put(HttpHeaders.AUTHORIZATION, params);
+        ContextUtils.get().put("x-workspace-id", workspaceId);
     }
 }
