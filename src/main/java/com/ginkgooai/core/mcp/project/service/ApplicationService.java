@@ -7,12 +7,11 @@ import com.ginkgooai.core.mcp.project.dto.ApplicationResponse;
 import com.ginkgooai.core.mcp.project.dto.NoteCreateRequest;
 import com.ginkgooai.core.mcp.project.dto.enums.ApplicationStatus;
 import com.ginkgooai.core.mcp.tools.McpToolsService;
-import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,29 +23,30 @@ public class ApplicationService implements McpToolsService {
 
     @Tool(description = "Get all applications")
     Page<ApplicationResponse> listApplications(
-            @RequestParam(required = false) String projectId,
-            @RequestParam(required = false) String roleId,
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) ApplicationStatus status,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "DESC") String sortDirection,
-            @RequestParam(defaultValue = "updatedAt") String sortField){
+            String params, String workspaceId,
+            @ToolParam(description = "Project id", required = false) String projectId,
+            @ToolParam(description = "Role id", required = false) String roleId,
+            @ToolParam(description = "Key word (include [talentName, talentEmail, agentName, agentEmail, roleName])", required = false) String keyword,
+            @ToolParam(description = "Application status", required = false) ApplicationStatus status,
+            @ToolParam(description = "Page number (zero-based)") int page,
+            @ToolParam(description = "Page size") int size,
+            @ToolParam(description = "Sort direction (ASC/DESC)", required = false) String sortDirection,
+            @ToolParam(description = "Sort field (e.g., updatedAt)", required = false) String sortField){
         return applicationClient.listApplications(projectId, roleId, keyword, status, page, size, sortDirection, sortField).getBody();
     }
 
-
     @Tool(description = "Get an application by ID")
-    ApplicationResponse getApplication(@Parameter(description = "Application ID", example = "app_12345")
-                                                       @PathVariable String id){
-        return applicationClient.getApplication(id).getBody();
+    ApplicationResponse getApplication(
+            String params, String workspaceId,
+            @ToolParam(description = "Application ID") String applicationId){
+        return applicationClient.getApplication(applicationId).getBody();
     }
 
     @Tool(description = "Add a note to an application")
     List<ApplicationNoteResponse> addNote(
-            @Parameter(description = "Application ID", example = "app_12345")
-            @PathVariable String id,
-            @RequestBody NoteCreateRequest request){
-        return applicationClient.addNote(id, request).getBody();
+            String params, String workspaceId,
+            @ToolParam(description = "Application ID") String applicationId,
+            @ToolParam(description = "Request object for creating a new note") NoteCreateRequest request){
+        return applicationClient.addNote(applicationId, request).getBody();
     }
 }
