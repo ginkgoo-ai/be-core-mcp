@@ -1,4 +1,4 @@
-package com.ginkgooai.core.mcp.project.model;
+package com.ginkgooai.core.mcp.project.dto;
 
 public enum ProjectStatus {
     DRAFTING,

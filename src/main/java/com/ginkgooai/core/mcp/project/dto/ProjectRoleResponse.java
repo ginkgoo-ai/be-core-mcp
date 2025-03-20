@@ -1,4 +1,4 @@
-package com.ginkgooai.core.mcp.project.model;
+package com.ginkgooai.core.mcp.project.dto;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
