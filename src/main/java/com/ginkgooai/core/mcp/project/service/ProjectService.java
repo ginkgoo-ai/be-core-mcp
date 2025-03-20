@@ -2,6 +2,7 @@ package com.ginkgooai.core.mcp.project.service;
 
 
 import com.ginkgooai.core.mcp.project.client.ProjectClient;
+import com.ginkgooai.core.mcp.project.dto.ProjectCreateRequest;
 import com.ginkgooai.core.mcp.project.dto.ProjectResponse;
 import com.ginkgooai.core.mcp.project.dto.ProjectRoleResponse;
 import com.ginkgooai.core.mcp.project.dto.ProjectStatus;
@@ -48,5 +49,13 @@ public class ProjectService implements McpToolsService {
             @ToolParam(description = "Sort direction (ASC/DESC)", required = false) String sort,
             @ToolParam(description = "Sort field (e.g., updatedAt)", required = false) String sortField) {
         return projectClient.getProjectRoles(projectId, 0, 100, sort, sortField).getBody();
+    }
+
+    @Tool(description = "Create project")
+    public ProjectResponse createProject(
+            String params,
+            String workspaceId,
+            @ToolParam(description = "create project request body") ProjectCreateRequest projectCreateRequest) {
+        return projectClient.createProject(projectCreateRequest).getBody();
     }
 }
