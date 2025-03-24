@@ -2,10 +2,7 @@ package com.ginkgooai.core.mcp.project.service;
 
 
 import com.ginkgooai.core.mcp.project.client.ProjectClient;
-import com.ginkgooai.core.mcp.project.dto.ProjectCreateRequest;
-import com.ginkgooai.core.mcp.project.dto.ProjectResponse;
-import com.ginkgooai.core.mcp.project.dto.ProjectRoleResponse;
-import com.ginkgooai.core.mcp.project.dto.ProjectStatus;
+import com.ginkgooai.core.mcp.project.dto.*;
 import com.ginkgooai.core.mcp.tools.McpToolsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.tool.annotation.Tool;
@@ -57,5 +54,13 @@ public class ProjectService implements McpToolsService {
             String workspaceId,
             @ToolParam(description = "create project request body") ProjectCreateRequest projectCreateRequest) {
         return projectClient.createProject(projectCreateRequest).getBody();
+    }
+
+    @Tool(description = "Update project role")
+    public ProjectRoleResponse updateRole(
+            @ToolParam String projectId,
+            @ToolParam String roleId,
+            @ToolParam ProjectRoleRequest request){
+        return projectClient.updateRole(projectId, roleId, request).getBody();
     }
 }
