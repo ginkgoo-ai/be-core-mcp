@@ -29,7 +29,7 @@
 	<properties>
 		<java.version>23</java.version>
 		<spring-cloud.version>2024.0.0</spring-cloud.version>
-		<spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
+		<spring-ai.version>1.0.0-M7</spring-ai.version>
 
 	</properties>
 
@@ -94,11 +94,12 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 
+
+		<!-- Mcp -->
+
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-mcp-server-webmvc-spring-boot-starter</artifactId>
-			<version>${spring-ai.version}</version>
-
+			<artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
 		</dependency>
 
 		<dependency>
