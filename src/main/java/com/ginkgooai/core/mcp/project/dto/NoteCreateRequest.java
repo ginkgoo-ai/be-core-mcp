@@ -8,6 +8,6 @@ import org.springframework.ai.tool.annotation.ToolParam;
 @Schema(description = "Request object for creating a new note")
 public class NoteCreateRequest {
 
-    @ToolParam(description = "Content of the note")
+    @Schema(description = "Content of the note")
     private String content;
 }

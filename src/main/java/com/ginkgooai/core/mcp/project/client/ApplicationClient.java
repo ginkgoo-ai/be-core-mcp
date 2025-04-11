@@ -1,9 +1,11 @@
 package com.ginkgooai.core.mcp.project.client;
 
 import com.ginkgooai.core.common.config.FeignConfig;
+import com.ginkgooai.core.common.utils.ContextUtils;
 import com.ginkgooai.core.mcp.project.dto.ApplicationNoteResponse;
 import com.ginkgooai.core.mcp.project.dto.ApplicationResponse;
 import com.ginkgooai.core.mcp.project.dto.NoteCreateRequest;
+import com.ginkgooai.core.mcp.project.dto.ProjectResponse;
 import com.ginkgooai.core.mcp.project.dto.enums.ApplicationStatus;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -37,5 +39,7 @@ public interface ApplicationClient {
             @Parameter(description = "Application ID", example = "app_12345")
             @PathVariable String id,
             @RequestBody NoteCreateRequest request);
+
+
 }
 

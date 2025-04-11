@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -62,5 +63,12 @@ public class ProjectService implements McpToolsService {
             @ToolParam String roleId,
             @ToolParam ProjectRoleRequest request){
         return projectClient.updateRole(projectId, roleId, request).getBody();
+    }
+
+    @Tool(description = "Update project by project id")
+    ResponseEntity<ProjectResponse> updateProject(
+            @ToolParam(description = "project id") String projectId,
+            @ToolParam ProjectUpdateRequest request){
+        return projectClient.updateProject(projectId, request);
     }
 }

@@ -1,10 +1,12 @@
 package com.ginkgooai.core.mcp.project.client;
 
 import com.ginkgooai.core.common.config.FeignConfig;
+import com.ginkgooai.core.common.utils.ContextUtils;
 import com.ginkgooai.core.mcp.project.dto.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +35,17 @@ public interface ProjectClient {
     @PostMapping("/projects")
     ResponseEntity<ProjectResponse> createProject(@RequestBody ProjectCreateRequest request);
 
+    @PutMapping("/projects/{id}")
+    ResponseEntity<ProjectResponse> updateProject(@PathVariable String id,
+                                                  @RequestBody ProjectUpdateRequest request);
+
+
     @PutMapping("/projects/{projectId}/roles/{roleId}")
     ResponseEntity<ProjectRoleResponse> updateRole(
             @PathVariable String projectId,
             @PathVariable String roleId,
             @RequestBody ProjectRoleRequest request);
+
+
 }
 
