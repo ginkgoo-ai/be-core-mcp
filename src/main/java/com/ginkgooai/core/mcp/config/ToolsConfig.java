@@ -1,7 +1,6 @@
 package com.ginkgooai.core.mcp.config;
 
 
-import com.ginkgooai.core.mcp.project.service.ProjectService;
 import com.ginkgooai.core.mcp.tools.McpToolsService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;

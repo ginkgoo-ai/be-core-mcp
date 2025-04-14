@@ -1,4 +1,4 @@
-package com.ginkgooai.core.mcp.project.aop;
+package com.ginkgooai.core.mcp.aop;
 
 import com.ginkgooai.core.common.utils.ContextUtils;
 import org.aspectj.lang.annotation.Aspect;
