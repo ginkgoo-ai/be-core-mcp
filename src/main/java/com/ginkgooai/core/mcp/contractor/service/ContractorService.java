@@ -21,7 +21,6 @@ public class ContractorService implements McpToolsService {
 
     @Tool(description = "Get contractor list")
     public Page<Contractor> getContractorList(
-            String params, String workspaceId,
             @ToolParam QueryContractorRequest queryContractorRequest,
             @ToolParam PaginationRequest paginationRequest,
             @ToolParam SortRequest sortRequest) {
