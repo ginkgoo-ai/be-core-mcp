@@ -3,12 +3,15 @@ package com.ginkgooai.core.mcp.contractor.service;
 
 import com.ginkgooai.core.mcp.contractor.client.ContractorClient;
 import com.ginkgooai.core.mcp.contractor.dto.Contractor;
+import com.ginkgooai.core.mcp.contractor.dto.request.QueryContractorRequest;
+import com.ginkgooai.core.mcp.jpa.query.PaginationRequest;
+import com.ginkgooai.core.mcp.jpa.query.SortRequest;
 import com.ginkgooai.core.mcp.tools.McpToolsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,10 +20,11 @@ public class ContractorService implements McpToolsService {
     private final ContractorClient contractorClient;
 
     @Tool(description = "Get contractor list")
-    public List<Contractor> getContractorList(
-            String params, String workspaceId){
-        return List.of(Contractor.builder().id("0")
-                .address("新西兰")
-                .county("英国").build());
+    public Page<Contractor> getContractorList(
+            String params, String workspaceId,
+            @ToolParam QueryContractorRequest queryContractorRequest,
+            @ToolParam PaginationRequest paginationRequest,
+            @ToolParam SortRequest sortRequest) {
+        return contractorClient.query(queryContractorRequest, paginationRequest, sortRequest);
     }
 }
