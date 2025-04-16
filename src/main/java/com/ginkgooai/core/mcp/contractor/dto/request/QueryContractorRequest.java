@@ -23,7 +23,7 @@ public class QueryContractorRequest{
     private String state;
     @Schema(description = "The classifications of the contractor", example = "C10", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<String> classifications;
-    @Schema(description = "The radius of the contractor", example = "100", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "The radius of the contractor", example = "100", requiredMode = Schema.RequiredMode.REQUIRED)
     private Double radius;
 
 }
