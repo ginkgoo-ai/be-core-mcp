@@ -8,6 +8,7 @@ import com.ginkgooai.core.mcp.jpa.query.PaginationRequest;
 import com.ginkgooai.core.mcp.jpa.query.SortRequest;
 import com.ginkgooai.core.mcp.tools.McpToolsService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ContractorService implements McpToolsService {
 
     private final ContractorClient contractorClient;
@@ -25,6 +27,9 @@ public class ContractorService implements McpToolsService {
             @ToolParam PaginationRequest paginationRequest,
             @ToolParam SortRequest sortRequest) {
 
+        log.info("queryContractorRequest: {}", queryContractorRequest);
+        log.info("paginationRequest: {}", paginationRequest);
+        log.info("sortRequest: {}", sortRequest);
         if (queryContractorRequest.getRadius() != null && queryContractorRequest.getAddress() == null) {
             throw new IllegalArgumentException("Address is required when radius is provided");
         }
