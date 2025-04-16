@@ -24,6 +24,11 @@ public class ContractorService implements McpToolsService {
             @ToolParam QueryContractorRequest queryContractorRequest,
             @ToolParam PaginationRequest paginationRequest,
             @ToolParam SortRequest sortRequest) {
+
+        if (queryContractorRequest.getRadius() != null && queryContractorRequest.getAddress() == null) {
+            throw new IllegalArgumentException("Address is required when radius is provided");
+        }
+
         return contractorClient.query(queryContractorRequest, paginationRequest, sortRequest);
     }
 }
