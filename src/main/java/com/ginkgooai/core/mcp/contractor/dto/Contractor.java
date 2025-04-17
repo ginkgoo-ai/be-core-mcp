@@ -1,9 +1,10 @@
 package com.ginkgooai.core.mcp.contractor.dto;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -30,29 +31,30 @@ public class Contractor {
     @Schema(description = "The address line")
     private String address;
 
-    @Schema(description = "The county name")
-    private String county;
-
     @Schema(description = "The city name")
     private String city;
 
-    @Schema(description = "The state code")
+    @Schema(description = "The county name")
+    private String county;
+
+    @Schema(description = "The State code")
     private String state;
 
     @Schema(description = "The zip code")
     private String zip;
 
 
-    @Schema(description = "Phone number")
+    @Schema(description = "The phone number")
     private String phoneNumber;
 
-    @Schema(description = "Issue date")
+    @Schema(description = "The issue date")
     private String issueDate;
 
-    @Schema(description = "Expiration date")
+    @Schema(description = "The Expiration date")
     private String expirationDate;
 
-    @Schema(description = "Last updated date")
+
+    @Schema(description = "The last updated date")
     private String lastUpdated;
 
     @Schema(description = "The latitude in degrees")
@@ -63,13 +65,28 @@ public class Contractor {
     @Schema(description = "The data source")
     private String dataSource;
 
+    @Schema(description = "The classification")
+    private String classification;
+
     @Schema(description = "The status")
     private String status;
 
-    @Hidden
-    private String classification;
-
     @Schema(description = "The classification array")
     private List<String> classificationArray;
+
+    @Schema(description = "The created at")
+    private Timestamp createdAt;
+
+    @Schema(description = "The updated at")
+    private Timestamp updatedAt;
+
+    @Schema(description = "The created by")
+    private String createdBy;
+
+    @Schema(description = "The updated by")
+    private String updatedBy;
+
+    @Schema(description = "The distance to given gps point")
+    private BigDecimal distance;
 
 }
