@@ -13,6 +13,10 @@ import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +34,13 @@ public class ContractorService implements McpToolsService {
         log.info("queryContractorRequest: {}", queryContractorRequest);
         log.info("paginationRequest: {}", paginationRequest);
         log.info("sortRequest: {}", sortRequest);
-        if (queryContractorRequest.getRadius() != null && queryContractorRequest.getAddress() == null) {
-            throw new IllegalArgumentException("Address is required when radius is provided");
+        if (queryContractorRequest.getAddress() != null && queryContractorRequest.getRadius() == null) {
+            queryContractorRequest.setRadius(80467.2);
+        }
+
+        if(!CollectionUtils.isEmpty(queryContractorRequest.getClassifications())){
+            List<String> list = queryContractorRequest.getClassifications().stream().map(contractor -> contractor.replaceAll("-", "")).toList();
+            queryContractorRequest.setClassifications(list);
         }
 
         return contractorClient.query(queryContractorRequest, paginationRequest, sortRequest);
